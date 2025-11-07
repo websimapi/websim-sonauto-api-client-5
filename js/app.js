@@ -74,12 +74,8 @@ async function handleGenerateSubmit(event) {
     event.preventDefault();
     
     if (!api.getAccessToken()) {
-        ui.logMessage('Authorization required before generating a song.');
-        const authorized = await handleAuthorization();
-        if (!authorized) {
-            ui.logError('Cannot generate song without authorization.');
-            return;
-        }
+        ui.logError('Authorization is required. Please click the "Authorize" button in the header.');
+        return;
     }
 
     const params = ui.getGenerateFormParams();
@@ -163,6 +159,7 @@ async function init() {
     document.getElementById('generate-form').addEventListener('submit', handleGenerateSubmit);
     document.getElementById('status-form').addEventListener('submit', handleStatusSubmit);
     document.querySelector('.tab-nav').addEventListener('click', handleTabClick);
+    document.getElementById('auth-btn').addEventListener('click', () => handleAuthorization());
     ui.clearLogs();
     
     const tokenFromUrl = getTokenFromQuery();
@@ -170,6 +167,7 @@ async function init() {
         await handleAuthorization(tokenFromUrl);
     } else {
          ui.updateAuthStatus('Not Authorized', 'error');
+         ui.logMessage('Welcome! Please click the "Authorize" button to begin.');
     }
 }
 

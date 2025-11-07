@@ -1,5 +1,6 @@
 const generateBtn = document.getElementById('generate-btn');
 const checkStatusBtn = document.getElementById('check-status-btn');
+const authBtn = document.getElementById('auth-btn');
 const resultsLog = document.getElementById('results-log');
 const authStatusText = document.getElementById('auth-status-text');
 const authStatusBar = document.getElementById('auth-status');
@@ -43,8 +44,12 @@ export function setLoading(isLoading) {
 export function setAuthLoading(isLoading) {
     generateBtn.disabled = isLoading;
     checkStatusBtn.disabled = isLoading;
+    authBtn.disabled = isLoading;
     if (isLoading) {
         generateBtn.textContent = 'Authorizing...';
+        authBtn.textContent = 'Authorizing...';
+    } else {
+        authBtn.textContent = 'Authorize';
     }
 }
 
@@ -53,8 +58,12 @@ export function updateAuthStatus(message, status = 'neutral') {
     authStatusBar.className = 'auth-status-bar'; // reset
     if (status === 'success') {
         authStatusBar.classList.add('success');
+        authBtn.style.display = 'none';
     } else if (status === 'error') {
         authStatusBar.classList.add('error');
+        authBtn.style.display = 'inline-block';
+    } else {
+        authBtn.style.display = 'inline-block';
     }
 }
 

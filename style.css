@@ -60,6 +60,9 @@ header p {
     font-size: 0.9rem;
     color: var(--text-muted-color);
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .auth-status-bar.success {
@@ -72,6 +75,26 @@ header p {
     background-color: #dc354520;
     border-color: var(--error-color);
     color: var(--error-color);
+}
+
+#auth-btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#auth-btn:hover {
+    background-color: var(--primary-hover-color);
+}
+
+#auth-btn:disabled {
+    background-color: #555;
+    cursor: not-allowed;
 }
 
 section, main {
